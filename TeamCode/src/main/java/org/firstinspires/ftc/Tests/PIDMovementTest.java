@@ -63,7 +63,7 @@ import java.text.DecimalFormat;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Blue Side Skystone", group="Pushbot")
+@Autonomous(name="PID Movement Test", group="Pushbot")
 //@Disabled
 public class PIDMovementTest extends MovementMethod {
 
