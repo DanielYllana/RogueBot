@@ -16,7 +16,7 @@ import org.firstinspires.ftc.CV_Algorithm.skystoneDetectorClass;
 
 import java.text.DecimalFormat;
 
-@TeleOp
+@TeleOp(name="Max Velocity Test", group = "TeleOp")
 
 public class MaxVelocityTest extends LinearOpMode {
 
