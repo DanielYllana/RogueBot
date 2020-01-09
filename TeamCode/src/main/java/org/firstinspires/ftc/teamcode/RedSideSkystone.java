@@ -62,9 +62,9 @@ import java.text.DecimalFormat;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Blue Side Skystone", group="Pushbot")
+@Autonomous(name="Red Side SkyStone", group="Pushbot")
 //@Disabled
-public class BlueSideSkystone extends MovementMethod {
+public class RedSideSkystone extends MovementMethod {
 
     /* Declare OpMode members. */
     RogueBot robot = new RogueBot();   // Use a Pushbot's hardware
@@ -147,21 +147,19 @@ public class BlueSideSkystone extends MovementMethod {
         extend(robot);
         sleep(250);
         //Move forward to the stone
-        encoderMovement(58, 90, speed, 3, robot);
+        encoderMovement(60, 90, speed, 3, robot);
         sleep(250);
         //Move to the left to align robot with skystone
         encoderMovement(20,180,3,robot);
         sleep(250);
         //Grab Skystone
         grabDown(robot);
-        sleep(250);
-        encoderMovement(15,270,3,robot);
         sleep(500);
         //Rotate to face bridge
-        turn(75,robot);
+        turn(45,robot);
         sleep(500);
         //Go towards the other side of the field
-        encoderMovement(150,90,speed,3,robot);
+        encoderMovement(80,90,speed,3,robot);
         sleep(1000);
         //Let go of skystone
         grabUp(robot);
@@ -176,27 +174,25 @@ public class BlueSideSkystone extends MovementMethod {
         extend(robot);
         sleep(250);
         //Move forward to the stone
-        encoderMovement(58, 90, speed, 3, robot);
+        encoderMovement(60, 90, speed, 3, robot);
         sleep(250);
         //Move to the right to align robot with skystone
         encoderMovement(20,0,3,robot);
         sleep(250);
         //Grab Skystone
         grabDown(robot);
-        sleep(250);
-        encoderMovement(10,270,3,robot);
-        sleep(250);
+        sleep(500);
         //Rotate to face bridge
-        turn(75,robot);
+        turn(45,robot);
         sleep(500);
         //Go towards the other side of the field
-        encoderMovement(110,90,speed,3,robot);
+        encoderMovement(60,90,speed,3,robot);
         sleep(1000);
         //Let go of skystone
         grabUp(robot);
         sleep(250);
         //Move back to park under bridge
-        encoderMovement(40,270,3,robot);
+        encoderMovement(30,270,3,robot);
     }
 
     public void middleStone(double speed){
@@ -211,10 +207,10 @@ public class BlueSideSkystone extends MovementMethod {
         grabDown(robot);
         sleep(500);
         //Rotate to face bridge
-        turn(75,robot);
+        turn(-75,robot);
         sleep(500);
         //Go towards the other side of the field
-        encoderMovement(100,90,speed,3,robot);
+        encoderMovement(60,90,speed,3,robot);
         sleep(1000);
         //Let go of skystone
         grabUp(robot);

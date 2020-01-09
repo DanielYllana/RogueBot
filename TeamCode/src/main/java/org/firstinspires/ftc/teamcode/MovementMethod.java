@@ -430,6 +430,34 @@ public abstract class MovementMethod extends LinearOpMode {
         robot.leftBackMotor.setPositionPIDFCoefficients(distance);
     }
 
+    //These two methods are used to grab the blocks with the intake during autonomous.
+    public void grabDown(RogueBot robot){
+        robot.intakeServo.setPosition(.45);
+        sleep(500);
+        telemetry.addData("0", robot.intakeServo.getPosition());
+        telemetry.update();
+    }
+
+    public void grabUp(RogueBot robot){
+        robot.intakeServo.setPosition(.9);
+        sleep(500);
+        telemetry.addData("1", robot.intakeServo.getPosition());
+        telemetry.update();
+    }
+
+    //This method unfolds the intake to be used during autonomous.
+    public void extend(RogueBot robot){
+        encoderLift(75,2,robot);
+        sleep(500);
+        telemetry.addData("now", "");
+        telemetry.update();
+        robot.rotateServo.setPosition(0);
+        sleep(500);
+        robot.rotateServo.setPosition(1);
+        sleep(500);
+        encoderLift(-165,2,robot);
+    }
+
 
     public void closeIntake(RogueBot robot){
         telemetry.addData("CLose", "INtake");
@@ -518,21 +546,20 @@ public abstract class MovementMethod extends LinearOpMode {
         robot.rightBackMotor.setPower(0);
     }
 
-    public void encoderLift(double height, double timeoutS, RogueBot robot){
+    //This method is used to move the lift up and down.
+    public void encoderLift(double height, double timeoutS, RogueBot robot) {
         int newLiftTarget;
-
-
+        robot.liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         // Ensure that the opmode is still active
         if (opModeIsActive()) {
 
             // Reset Encoders
-            robot.liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
             // Determine new target position, and pass to motor controller
-            newLiftTarget = robot.liftMotor.getCurrentPosition() + (int)(height * COUNTS_PER_INCH);
+            newLiftTarget = robot.liftMotor.getCurrentPosition() + (int) (height * COUNTS_PER_INCH);
 
-            // Assign new raget position
+            // Assign new target position
             robot.liftMotor.setTargetPosition(newLiftTarget);
 
             // Turn On RUN_TO_POSITION
@@ -541,7 +568,8 @@ public abstract class MovementMethod extends LinearOpMode {
 
             // reset the timeout time and start motion.
             runtime.reset();
-            robot.liftMotor.setPower(Math.abs(Lift_Speed));
+
+            robot.liftMotor.setPower(Lift_Speed);
 
 
             while (opModeIsActive() &&
@@ -549,9 +577,8 @@ public abstract class MovementMethod extends LinearOpMode {
                     (robot.liftMotor.isBusy())) {
 
 
-                // Display it for the driver.
-                telemetry.addData("Path2",  "Running at %7d :%7d",
-                        robot.liftMotor.getCurrentPosition());
+//                 Display it for the driver.
+                telemetry.addData("Path2", "");
                 telemetry.update();
             }
 
@@ -563,5 +590,4 @@ public abstract class MovementMethod extends LinearOpMode {
 
         }
     }
-
 }
