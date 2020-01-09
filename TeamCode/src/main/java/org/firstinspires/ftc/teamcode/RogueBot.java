@@ -33,6 +33,7 @@ import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotor.RunMode;
 import com.qualcomm.robotcore.hardware.DcMotor.ZeroPowerBehavior;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -69,10 +70,10 @@ public class RogueBot
 //    public Servo rightClampServo   = null;
 //    public Servo armServo = null;
 //    public ColorSensor colorSensor;
-  public DcMotor leftFrontMotor= null;
-  public DcMotor leftBackMotor= null;
-  public DcMotor rightBackMotor= null;
-  public DcMotor rightFrontMotor= null;
+  public DcMotorEx leftFrontMotor= null;
+  public DcMotorEx leftBackMotor= null;
+  public DcMotorEx rightBackMotor= null;
+  public DcMotorEx rightFrontMotor= null;
   public CRServo hookServo_1 = null;
   public CRServo hookServo_2 = null;
   public Servo rotateServo = null;
@@ -139,10 +140,10 @@ public class RogueBot
 
     //Assigning variables
     // Drivebase motors
-    leftFrontMotor = hardwareMap.dcMotor.get("frontLeft");
-    leftBackMotor = hardwareMap.dcMotor.get("backLeft");
-    rightBackMotor = hardwareMap.dcMotor.get("backRight");
-    rightFrontMotor = hardwareMap.dcMotor.get("frontRight");
+    leftFrontMotor = (DcMotorEx) hardwareMap.dcMotor.get("frontLeft");
+    leftBackMotor = (DcMotorEx) hardwareMap.dcMotor.get("backLeft");
+    rightBackMotor = (DcMotorEx) hardwareMap.dcMotor.get("backRight");
+    rightFrontMotor = (DcMotorEx) hardwareMap.dcMotor.get("frontRight");
 
     // Lift motors
     liftMotor = hardwareMap.dcMotor.get("liftMotor");
