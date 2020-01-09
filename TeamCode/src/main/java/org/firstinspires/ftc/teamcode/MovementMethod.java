@@ -393,6 +393,7 @@ public abstract class MovementMethod extends LinearOpMode {
             robot.rightFrontMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             robot.rightBackMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             robot.leftBackMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
             telemetry.addData("Power of left front", "FLP (%.2f", robot.leftFrontMotor.getPower());
             telemetry.addData("Motor Power, Motor Distance ", "FL (%.2f), FR (%.2f), FLD (%d), FRD (%d)", robot.leftFrontMotor.getPower(), robot.rightFrontMotor.getPower(), robot.leftFrontMotor.getCurrentPosition(), robot.rightFrontMotor.getCurrentPosition());
             telemetry.addData("Motor Power ", "BLP (%.2f), BRP (%.2f), BLD (%d), BRD (%d)", robot.leftBackMotor.getPower(), robot.rightBackMotor.getPower(), robot.leftBackMotor.getCurrentPosition(), robot.rightBackMotor.getCurrentPosition());
@@ -400,6 +401,33 @@ public abstract class MovementMethod extends LinearOpMode {
             telemetry.update();
             sleep(500);   // optional pause after each move
         }
+    }
+
+    // Overload method to move at a certain speed given as a parameter
+    public void PIDMovement(double distance, RogueBot robot) {
+
+        telemetry.addData("Start Moving", "");
+        telemetry.update();
+        setPIDValues(robot, distance);
+
+
+    }
+
+    public void setPIDValues(RogueBot robot, double distance){
+        robot.rightFrontMotor.setTargetPositionTolerance(50);
+        robot.rightBackMotor.setTargetPositionTolerance(50);
+        robot.leftFrontMotor.setTargetPositionTolerance(50);
+        robot.leftBackMotor.setTargetPositionTolerance(50);
+
+        robot.rightFrontMotor.setVelocityPIDFCoefficients(1.26,0.126,0,12.6);
+        robot.rightBackMotor.setVelocityPIDFCoefficients(1.26,0.126,0,12.6);
+        robot.leftFrontMotor.setVelocityPIDFCoefficients(1.26,0.126,0,12.6);
+        robot.leftBackMotor.setVelocityPIDFCoefficients(1.26,0.126,0,12.6);
+
+        robot.rightFrontMotor.setPositionPIDFCoefficients(distance);
+        robot.rightBackMotor.setPositionPIDFCoefficients(distance);
+        robot.leftFrontMotor.setPositionPIDFCoefficients(distance);
+        robot.leftBackMotor.setPositionPIDFCoefficients(distance);
     }
 
 
